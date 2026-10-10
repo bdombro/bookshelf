@@ -1,0 +1,5 @@
+.venv/
+__pycache__/
+build/*
+!build/materials.md
+!build/instructions.md

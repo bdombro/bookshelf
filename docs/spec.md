@@ -37,15 +37,16 @@ carcass is 29.9cm deep with the back, 32.3cm at the cabinet doors.
 - Narrow ×2: 32cm wide. 6 open compartments, lined up with the wide units' shelves.
 - 24mm laminated pine for every panel except the backs, which are 4mm birch plywood,
 glued and stapled.
-- Estimated cost ~€790 before delivery: 4 pine and 2 birch sheets €525.58, cutting by
-Strahan Timber (cutmylist.ie) ~€64, hardware and finish ~€200.
+- Estimated cost ~€800 before delivery: 4 pine and 2 birch sheets €525.58, cutting by
+Strahan Timber (cutmylist.ie) ~€75, hardware and finish ~€200.
 
 **Outputs** (all in `build/`, detailed in [Outputs](#65-outputs)):
 
 - `bookshelf.step` and `bookshelf.stl`: the assembled layout for other tools.
 - `front.svg`: front elevation of both sets.
 - `materials.md`: parts, sheets, cutting list, hardware and cost.
-- `sheets/*.svg`: one cutting diagram per sheet.
+- `sheets/*.svg`: one cutting diagram per sheet, plus `all.svg` with every sheet stacked
+vertically and `all.png` rendered from it.
 - `instructions.md`: step-by-step assembly with a shelf marking guide.
 
 
@@ -108,23 +109,24 @@ from the cabinet top up, so shelf lines run straight across a set.
 | ------------------- | ------------------------ | ----------- |
 | Kickboard           | 0–10                     | 0–10        |
 | Bottom              | 10–12.4                  | 10–12.4     |
-| Lower shelf         | cabinet shelf, 41.8–44.2 | 41.8–44.2   |
-| Cabinet top / shelf | 73.6–76                  | 73.6–76     |
-| Shelf               | 107.9–110.3              | 107.9–110.3 |
-| Shelf               | 142.1–144.5              | 142.1–144.5 |
-| Shelf               | 176.4–178.8              | 176.4–178.8 |
+| Lower shelf         | cabinet shelf, 47.3–49.7 | 47.3–49.7   |
+| Cabinet top / shelf | 84.6–87                  | 84.6–87     |
+| Shelf               | 116.1–118.5              | 116.1–118.5 |
+| Shelf               | 147.6–150                | 147.6–150   |
+| Shelf               | 179.1–181.5              | 179.1–181.5 |
 | Top                 | 210.6–213                | 210.6–213   |
 
 
-Compartments are ~31.9cm clear above the cabinet top and ~29.4cm below it in the narrow
-units. The wide unit's cabinet shelf is 25cm deep against the back, leaving ~4.5cm at the
+The cabinet top is at 87cm, close to a built-in's usual 85–90cm; a door one shelf's
+length shorter than 243cm leaves room for six narrow shelves on its strip. Compartments
+are ~29.1cm clear above the cabinet top and ~34.9cm below it in the narrow units. The wide unit's cabinet shelf is 25cm deep against the back, leaving ~4.5cm at the
 front for hinges.
 
 ### 3.4 Doors
 
 Wide units only. Full overlay: outer edges flush with the outside of the sides, a 0.4cm
-gap between the pair, from 10.2cm to 75.8cm, covering the front edges of the sides,
-bottom and cabinet top. Each is 41.6 × 65.6 × 2.4cm, grain vertical, on 2 soft-close
+gap between the pair, from 10.2cm to 86.8cm, covering the front edges of the sides,
+bottom and cabinet top. Each is 41.6 × 76.6 × 2.4cm, grain vertical, on 2 soft-close
 concealed hinges with one knob.
 
 ### 3.5 Backs
@@ -146,7 +148,7 @@ Per unit. All pine parts are 2.4cm thick.
 | Shelves          | 3 × 78.8 × 29.5 | 5 × 27.2 × 29.5 |
 | Cabinet shelf    | 1 × 78.8 × 25   | –               |
 | Kickboard        | 1 × 78.8 × 10   | 1 × 27.2 × 10   |
-| Doors            | 2 × 41.6 × 65.6 | –               |
+| Doors            | 2 × 41.6 × 76.6 | –               |
 | Back (4mm birch) | 1 × 83.6 × 213  | 1 × 32 × 213    |
 
 
@@ -170,8 +172,9 @@ often a little under.
 
 ### 4.2 Cutting
 
-About 64 cuts (≈58 pine, 6 birch). Strahan doesn't publish a price, so the estimate
-assumes €1 per cut: ~€64. Replace it with their quote.
+About 75 cuts (67 pine, 8 birch), counting a rip per strip, a crosscut per part and an
+extra rip per part narrower than its strip. Strahan doesn't publish a price, so the
+estimate assumes €1 per cut: ~€75. Replace it with their quote.
 
 ⚠️ **Saw width before ordering precut:** the packing assumes a 3mm saw cut (`config.kerf`).
 Industrial panel saws like Strahan's often cut ~4mm. The 4-sheet layout still fits at
@@ -205,10 +208,10 @@ Most concealed hinges cover 16–26mm doors; check before buying.
 |                     | Estimate                          |
 | ------------------- | --------------------------------- |
 | Sheets              | €525.58                           |
-| Cutting             | ~€64                              |
+| Cutting             | ~€75                              |
 | Hardware and finish | ~€200                             |
 | Delivery            | unknown (0 for click and collect) |
-| **Total**           | **~€790 before delivery**         |
+| **Total**           | **~€800 before delivery**         |
 
 
 
@@ -256,6 +259,7 @@ bookshelf/
   .python-version      # 3.12
   AGENTS.md            # code style, quality control, spec alignment
   CLAUDE.md            # imports AGENTS.md
+  README.md            # what it produces, how to change it, how it works
   justfile
   pyproject.toml
   uv.lock
@@ -314,12 +318,15 @@ report the version that failed.
 justfile recipes, alphabetical, each a one-liner over `uv run` (which syncs dependencies
 itself, so there's no setup recipe):
 
-- `build`: runs `src/model.py`, writing everything to `build/`.
+- `build`: runs `src/model.py`, writing everything to `build/`, then renders
+`sheets/all.png` with `rsvg-convert` (librsvg, `brew install librsvg`). ImageMagick's
+built-in SVG renderer was tried and drops outlines and the grain arrow.
 - `check`: runs `ruff format --check`, `ruff check`, basedpyright and `typos` through
 `uvx`, so none are project dependencies, then `just --fmt --check --unstable` and
 `uv run pytest`.
   - **Ruff:** default line length (88); rules `F`, `E`, `W`, `I`, `B`, `UP`, `SIM`,
-  `C4`, `PTH`, `RUF`, `N` selected in `pyproject.toml`.
+  `C4`, `PTH`, `RUF`, `N` selected in `pyproject.toml`; `×` and `–` are allowed
+  confusables, since the outputs use them.
   - **basedpyright:** "standard" mode, configured under `[tool.basedpyright]` in
   `pyproject.toml` so the editor and CLI agree. Strict would flood with errors from
   the untyped OCP layer, which may still need a few targeted ignores.
@@ -345,7 +352,8 @@ cabinet height, door gaps, cabinet shelf depth.
 fireplace) come from it.
 - **Sheets and cutting:** sheet size, `kerf = 0.3`, edge trim.
 - **Prices:** per sheet, per cut, delivery, and per hardware pack.
-- **Viewer:** `hide_doors`, to see inside the cabinets.
+- **Viewer:** `hide_doors`, to see inside the cabinets; `pine_color` and `birch_color`
+for the viewer and STEP file.
 
 Only things a person would change live here. Derived sizes (shelf lengths, the shelf
 heights both unit types share, door sizes) and hardware counts depend on the geometry,
@@ -389,8 +397,8 @@ message on failure, so a bad model never reaches `build/`.
 
 All overwrite `build/` on every run, and each path is printed.
 
-`bookshelf.step` **/** `bookshelf.stl`**:** the full named assembly for other CAD tools, and a
-mesh for quick previews.
+`bookshelf.step` **/** `bookshelf.stl`**:** the full named, coloured assembly for other CAD tools,
+and a mesh for quick previews (STL holds no colour).
 
 `front.svg`**:** front elevation of both sets with the fireplace gap. The assembly is
 projected from a camera straight in front (`project_to_viewport`) and written with
@@ -414,7 +422,8 @@ labeled estimates; a price of 0 shows as unknown.
 `config.kerf` and to confirm the cutter's saw width before ordering precut.
 
 `sheets/*.svg`, written by `materials.py` from the same packing: each part's position,
-label and size with a grain arrow; offcuts blank. Plain SVG text, no drawing library.
+label and size with a grain arrow; offcuts blank. `all.svg` stacks every sheet top to
+bottom in one file. Plain SVG text, no drawing library.
 
 `instructions.md`, written by `instructions.py` as a plain template with the model's
 numbers filled in. Ordered steps, each listing the parts and hardware it uses:
@@ -456,8 +465,10 @@ packer tries several part orderings and keeps the one with the fewest sheets.
 - **Expected:** 4 pine and 2 birch sheets. A hand layout that achieves it:
   - Pine 1–2: four side strips each; each side's offcut is a narrow shelf.
   - Pine 3: four strips of three wide shelf-sized panels (12).
-  - Pine 4: two 41.6cm door strips (2 doors and 3 narrow shelves each), a 10cm strip with
-  all 4 kickboards, and a 25cm strip with both cabinet shelves.
+  - Pine 4: two 41.6cm door strips (3 doors; 1 door and 6 narrow shelves), a 10cm strip
+  with the kickboards, and a 25cm strip with both cabinet shelves.
+  - The 1-door strip is the tightest: a door longer than 77.6cm (3mm saw) or 76.6cm (4mm)
+  costs a 5th pine sheet.
   - Birch 1–2: one wide and one narrow back side by side.
 
 
@@ -508,6 +519,11 @@ edges need no banding. MDF was ruled out because it sags under books.
 
 **Dimensions:**
 
+- Cabinet top at 90cm (the usual built-in height): doors 79.6cm long no longer fit a
+strip with six narrow shelves, costing a 5th pine sheet (+€98.40); 87cm keeps 4 sheets
+with a 3mm or 4mm saw. 88cm fits only with a 3mm saw.
+- Cabinet top at 76cm (desk height): replaced by 87cm for a taller, more built-in cabinet
+at the same sheet count.
 - 91.6cm wide units (88cm shelves): only two shelves per strip, costing a 5th pine and a
 3rd birch sheet.
 - 30cm narrow units: fits, but 26.4cm inside is tight for books; 32cm lets side offcuts
@@ -568,12 +584,12 @@ covers it.
 Progress: ⬜ unblocked · 🛑 blocked · 🔄 in progress · ✅ done · ❓ undecided · ⏸️ paused · 🚫 not doing
 
 - ✅ Design confirmed
-- ⬜ Setup and justfile ([6.2](#62-setup-and-commands))
-- ⬜ Settings and model ([6.3](#63-settings), [6.4](#64-model))
-- ⬜ Model checks ([7](#7-quality))
-- ⬜ STEP, STL and front view ([6.5](#65-outputs))
-- ⬜ Packing, packer tests and material spec ([6.6](#66-packing), [7](#7-quality), [6.5](#65-outputs))
-- ⬜ Sheet diagrams ([6.5](#65-outputs))
-- ⬜ Assembly instructions ([6.5](#65-outputs))
+- ✅ Setup and justfile ([6.2](#62-setup-and-commands))
+- ✅ Settings and model ([6.3](#63-settings), [6.4](#64-model))
+- ✅ Model checks ([7](#7-quality))
+- ✅ STEP, STL and front view ([6.5](#65-outputs))
+- ✅ Packing, packer tests and material spec ([6.6](#66-packing), [7](#7-quality), [6.5](#65-outputs))
+- ✅ Sheet diagrams ([6.5](#65-outputs))
+- ✅ Assembly instructions ([6.5](#65-outputs))
 - ⬜ Real prices: cutting quote, saw width, hardware, delivery ([4](#4-materials-and-cost))
 
