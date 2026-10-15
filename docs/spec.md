@@ -37,14 +37,14 @@ carcass is 29.9cm deep with the back, 32.3cm at the cabinet doors.
 - Narrow ×2: 32cm wide. 6 open compartments, lined up with the wide units' shelves.
 - 24mm laminated pine for every panel except the backs, which are 4mm birch plywood,
 glued and stapled.
-- Estimated cost ~€800 before delivery: 4 pine and 2 birch sheets €525.58, cutting by
-Strahan Timber (cutmylist.ie) ~€75, hardware and finish ~€200.
+- Estimated cost ~€769 before delivery: 4 pine and 2 birch sheets €525.58, cut at home with a
+plunge saw, hardware and finish ~€256.
 
 **Outputs** (all in `build/`, detailed in [Outputs](#65-outputs)):
 
 - `bookshelf.step` and `bookshelf.stl`: the assembled layout for other tools.
 - `front.svg`: front elevation of both sets.
-- `materials.md`: parts, sheets, cutting list, hardware and cost.
+- `materials.md`: parts, sheets, hardware and cost.
 - `sheets/*.svg`: one cutting diagram per sheet, plus `all.svg` with every sheet stacked
 vertically and `all.png` rendered from it.
 - `instructions.md`: step-by-step assembly with a shelf marking guide.
@@ -61,7 +61,7 @@ clearance is fine.
 trimmed off each edge for squaring.
 - **Grain:** laminated pine's strips run along the sheet's 244cm length. Every pine part
 keeps its length along them: sides and doors vertical, shelves the long way.
-- **Saw width:** `config.kerf` setting, 0.3cm for now. The cutter's saw may be ~0.4cm; the
+- **Saw width:** `config.kerf` setting, 0.3cm; plunge saw blades cut 0.22–0.28cm; the
 4-sheet layout fits either way.
 - **Flexible sizes:** exact dimensions can change whenever that makes building, cutting
 or buying simpler. Most sizes below were picked for sheet yield.
@@ -162,7 +162,7 @@ Expected figures with the defaults. Exact counts come from `build/materials.md`.
 
 - 24mm laminated (edge-glued) solid pine, €98.40: 4 sheets, about 90% used.
 - 4mm BB/BB birch plywood, €65.99: 2 sheets, one set's two backs on each.
-- Sheets total €525.58.
+- Sheets total €525.58, from Strahan Timber ([cutmylist.ie](https://cutmylist.ie)).
 - Measure the sheets and set the thickness settings to match; nominal thicknesses are
 often a little under.
 - Pine edges are solid wood, so no edge banding.
@@ -173,12 +173,13 @@ often a little under.
 ### 4.2 Cutting
 
 About 75 cuts (67 pine, 8 birch), counting a rip per strip, a crosscut per part and an
-extra rip per part narrower than its strip. Strahan doesn't publish a price, so the
-estimate assumes €1 per cut: ~€75. Replace it with their quote.
+extra rip per part narrower than its strip, all done at home with a plunge saw: €0.
+Needs about 2.6m of joined track for the 244cm rips and 213cm crosscuts, and rigid foam
+insulation under each sheet.
 
-⚠️ **Saw width before ordering precut:** the packing assumes a 3mm saw cut (`config.kerf`).
-Industrial panel saws like Strahan's often cut ~4mm. The 4-sheet layout still fits at
-4mm, but confirm their saw width and set `config.kerf` before submitting the list.
+⚠️ **Saw width:** the packing assumes a 3mm saw cut (`config.kerf`). Plunge saw blades
+cut 2.2–2.8mm, so it has margin; the 4-sheet layout also fits at 4mm. Check the blade
+and set `config.kerf` if it's wider.
 
 ### 4.3 Hardware and finish
 
@@ -189,18 +190,27 @@ Rough placeholder prices, each a setting; replace with real ones.
 | --------------------- | ------------------------------------------------------------ | --------- |
 | Hinges ×8             | soft-close 35mm concealed full overlay, rated for 24mm doors | €40       |
 | Knobs ×4              | one per door                                                 | €12       |
-| Confirmat screws ~190 | 7 × 60mm for 24mm panels, 2 boxes of 100                     | €24       |
-| Stepped drill bit     | matching the confirmats                                      | €10       |
+| Wood screws ~128      | 4 × 40mm countersunk, coarse thread, already owned           | €0        |
+| Washers ~128          | M4 flat, one under each screw head, already owned            | €0        |
+| Pocket plugs ~64      | [Shiwaki pine 9.5mm, 50 pack](https://www.amazon.ie/dp/B09P53GBG9), for open shelves, 2 packs | €15.98 |
+| Pocket hole jig       | [Gunpla twin kit](https://www.amazon.ie/dp/B0BGWRQYNC), set for 24mm, already bought | €0 |
 | Staples               | narrow crown, 16–19mm legs                                   | €8        |
 | Wood glue             | 1L                                                           | €12       |
 | Connector bolts ×8    | for the joint in each set                                    | €8        |
 | Anti-tip brackets ×4  | one per unit                                                 | €16       |
 | Plasterboard toggles  | spring or snap, for fixings that miss a stud                 | €10       |
-| Clear finish          | ~4L, both faces of every panel, two coats                    | €60       |
-| **Subtotal**          |                                                              | **~€200** |
+| Varnish ×4            | [Ronseal Interior Antique Pine satin 750ml](https://tjomahony.ie/rn-int-varnish-antique-pine-satin-750ml-7536837.html), one coat | €87.64    |
+| Roller kit            | [Axus Blonde natural wool mini, 101mm](https://tjomahony.ie/axus-blonde-100-natural-wool-mini-roller-kit-78axu-rkbln4.html) | €5.65 |
+| Roller sleeves ×3     | [Axus Blonde 101mm, pack of 10](https://tjomahony.ie/axus-blonde-100-natural-wool-mini-sleeve-pack-of-10-4-101mm-78axu-rbln410.html), 1 pack | €9.72 |
+| Brush                 | [Screwfix 173FM synthetic 3"](https://www.screwfix.ie/p/synthetic-paint-brush-3-/173fm) | €4.95     |
+| Sanding sponges ×5    | [Bosch Expert 421VV](https://www.screwfix.ie/p/bosch-expert-superfine-fine-medium-grit-multi-material-hand-sanding-sponges-97mm-x-67mm-3-pack/421vv), superfine/fine/medium, 2 packs | €13.70    |
+| **Subtotal**          |                                                              | **~€256** |
 
 
-Most concealed hinges cover 16–26mm doors; check before buying.
+Most concealed hinges cover 16–26mm doors; check before buying. Candidates:
+[LOOTICH pack of 8](https://www.amazon.ie/dp/B07RQNGGCY) (€17.22, rated 16–19mm; test on a
+24mm offcut first) or [Hettich pair](https://www.amazon.ie/dp/B078MBDM72) (€13.78 per 2,
+rated 15–24mm).
 
 ### 4.4 Total
 
@@ -208,10 +218,10 @@ Most concealed hinges cover 16–26mm doors; check before buying.
 |                     | Estimate                          |
 | ------------------- | --------------------------------- |
 | Sheets              | €525.58                           |
-| Cutting             | ~€75                              |
-| Hardware and finish | ~€200                             |
+| Cutting             | €0, own plunge saw                |
+| Hardware and finish | ~€256                             |
 | Delivery            | unknown (0 for click and collect) |
-| **Total**           | **~€800 before delivery**         |
+| **Total**           | **~€769 before delivery**         |
 
 
 
@@ -221,15 +231,23 @@ Most concealed hinges cover 16–26mm doors; check before buying.
 How it goes together. The generated `instructions.md` turns this into ordered steps with
 real part names and measurements.
 
-- **Cutting:** Strahan Timber cuts the sheets through
-[cutmylist.ie](https://www.cutmylist.ie/) on their panel saw, from the cutting list and
-sheet diagrams. They only cut boards bought from their stock and quote from a
-submitted cutting list. Delivery is Dublin only, or click and collect in Rathcoole. If
-their sheet count differs from ours, theirs wins.
+- **Cutting:** at home with a plunge saw, from the cutting list and sheet diagrams: rip
+strips, then crosscut each. Sheets on rigid foam insulation, about 2.6m of joined track,
+cut lines taped or scored against splintering. Full sheets come from Strahan Timber
+([cutmylist.ie](https://www.cutmylist.ie/)): delivery is Dublin only, or click and collect
+in Rathcoole, which needs a vehicle that takes 244 × 122cm sheets.
 - **Finishing:** sand and finish panels flat, before assembly, taping off glue areas.
 Laminated pine blotches under stain, so use a clear water-based finish or hardwax oil,
-or a pre-stain conditioner if staining. Test on an offcut first.
-- **Joinery:** butt joints with glue and confirmat screws; no clamps or dados.
+or a pre-stain conditioner if staining. Test on an offcut first. Water-based varnish:
+raise the grain with a damp cloth and sand 240 first; roll with the Axus Blonde wool mini
+roller, then tip off at once with a near-dry wide synthetic brush, light strokes
+along the grain, end to end in one pass; never rework areas that have started to set.
+Brush the edges, stir rather than shake. One coat. Coat both faces
+equally so panels don't cup. Hardwax oil is wiped on thin and buffed, not rolled.
+- **Joinery:** butt joints with glue and 4 × 40mm countersunk wood screws on M4 washers in pocket holes
+(pocket screws were out of stock; the washer gives the tapered head a flat seat), pockets on each panel's hidden
+face, so no screw heads show on the outer sides; open-shelf pockets are plugged. Clamp
+each panel on its line while driving; the screw nudges it away from the pocket face. No dados.
 - **Backs:** square each frame, then glue and staple every 10–15cm. Keep each staple's
 crown along the 24mm edge, not across it, so a leg can't split out through a face.
 Pencil the shelf lines on the back first. Glue is safe because every glued edge runs
@@ -411,15 +429,17 @@ layer.
 material. Identical panels grouped. Dimensions from each part's bounding box (smallest
 is thickness, largest is length), rounded to 0.1cm.
 - **Sheets to buy:** per material: sheet size, count, share of area used.
-- **Cutting list:** per sheet, strips to rip and parts to crosscut from each, in panel saw
-order. A part narrower than its strip gets an extra rip, listed with it.
 - **Hardware and finish:** counts derived from the parts and layout (hinges and knobs per
-door, confirmats per butt joint, staples per back, bolts per set joint, brackets per
-unit, finish by panel area), with packs to buy and cost.
+door, screws and washers per pocket, 2 pockets per panel end (plugs for the open shelves), staples per back, bolts per set joint, brackets per
+unit, finish and sanding by panel area), with packs to buy and cost. Panel area is both
+faces of every pine part (~24m²). Varnish litres = area × coats ÷ coverage (8m²/L, as bare
+pine soaks up the first coat), unrounded, then whole cans: 2.7L, 4 × 750ml. Sanding
+sponges = area ÷ 5m² per sponge, rounded up: 5, so 2 packs of 3. Roller sleeves = area ×
+coats ÷ 6m² per sleeve, rounded up, less the 1 assumed in the kit: 3, so 1 pack of 10.
 - **Cost:** sheets, cutting, hardware and finish, delivery, total. Placeholder prices are
 labeled estimates; a price of 0 shows as unknown.
 - **Saw width warning:** ⚠️ under the sheet count and the cost, stating the assumed
-`config.kerf` and to confirm the cutter's saw width before ordering precut.
+`config.kerf` and to confirm the saw width before cutting.
 
 `sheets/*.svg`, written by `materials.py` from the same packing: each part's position,
 label and size with a grain arrow; offcuts blank. `all.svg` stacks every sheet top to
@@ -428,7 +448,9 @@ bottom in one file. Plain SVG text, no drawing library.
 `instructions.md`, written by `instructions.py` as a plain template with the model's
 numbers filled in. Ordered steps, each listing the parts and hardware it uses:
 
-1. **Order:** submit the cutting list and diagrams; confirm the saw width first.
+1. **Cut:** the cutting list, per sheet: strips to rip and parts to crosscut from each,
+  in order, with a link to the sheet's diagram. A part narrower than its strip gets an
+  extra rip, listed with it. Plunge saw setup; check the blade width first.
 2. **Check and label:** count panels against the parts table, then pencil each part name
   (e.g. `wide_1 / shelf_2`) on an edge that will be hidden.
 3. **Sand and finish** both faces and visible edges, taping off glue areas.
@@ -436,8 +458,8 @@ numbers filled in. Ordered steps, each listing the parts and hardware it uses:
   underside from the bottom of the side (as in [Heights](#33-heights)). Mark each pair
    of sides together, as mirror images, on their inner faces. This is the core of the
    document: fixed shelves leave no room for error.
-5. **Drill for confirmats:** hole positions through each side into each panel end,
-  measured from the front edge.
+5. **Drill pocket holes:** on each panel's hidden face, at both ends, positions
+  measured from the panel's front edge.
 6. **Assemble each carcass** on its back: sides with top and bottom, then cabinet top and
   shelves, then the kickboard 5cm back from the front edge.
 7. **Square and fix the back:** diagonals equal to the expected value per unit type
@@ -452,7 +474,8 @@ Finish product instructions and wall cutouts are left out.
 
 ### 6.6 Packing
 
-How `materials.py` turns part rows into sheets and a cutting list.
+How `materials.py` turns part rows into sheets and a cutting list (written into
+`instructions.md`).
 
 - **Method:** pack the way a panel saw cuts: rip strips across the sheet, crosscut parts
 from each strip, with `config.kerf` per cut inside the usable 243 × 121cm. Each part's length
@@ -576,6 +599,12 @@ covers it.
 - Markdown formatter (prettier, mdformat): rewraps the spec's prose and adds diff noise.
 - mypy: duplicates basedpyright.
 - PNG front view: SVG needs no extra dependency and scales cleanly.
+- Strahan cutting the sheets on their panel saw (~€75 at an assumed €1 per cut): a plunge
+saw at home saves that, and the 3mm kerf setting already covers its blade.
+- Confirmat screws: their heads show on every visible outer side; pocket screws hide
+them on the shelves, at the cost of a jig and plugs for the open shelves.
+- Two coats of clear finish: one coat of water-based varnish saves time and about two cans;
+shelf tops and doors get the least protection, so add a second coat there if they mark.
 
 
 

@@ -30,9 +30,10 @@ class Part(NamedTuple):
 class Hardware(NamedTuple):
     item: str
     spec: str
-    quantity: int
-    pack_size: int
+    quantity: float
+    pack_size: float
     pack_price: float
+    url: str = ""
 
 
 class Placement(NamedTuple):
@@ -246,8 +247,9 @@ def write_materials(
     sheet_prices: dict[str, float],
     cut_price: float,
     delivery_price: float,
-) -> dict[str, int]:
-    """Pack each material, write materials.md and sheet diagrams; return counts."""
+) -> tuple[dict[str, int], list[str]]:
+    """Pack each material, write materials.md and sheet diagrams; return counts and
+    the cutting list lines."""
     usable_length = sheet_length - 2 * edge_trim
     usable_width = sheet_width - 2 * edge_trim
     materials = list(dict.fromkeys(p.material for p in parts))
@@ -261,8 +263,8 @@ def write_materials(
     cuts = sum(cut_count(packings[m]) for m in materials)
     warning = (
         f"⚠️ **Saw width:** the packing assumes a {size(kerf * 10)}mm saw cut. Panel "
-        "saws often cut ~4mm; confirm the cutter's saw width and update `kerf` before "
-        "ordering precut."
+        "saws often cut ~4mm, plunge saws 2.2–2.8mm; confirm the saw width and update "
+        "`kerf` before cutting."
     )
 
     lines = [
@@ -301,13 +303,13 @@ def write_materials(
             f"| {m} | {size(sheet_length)} × {size(sheet_width)} | {counts[m]} | "
             f"{used:.0%} | {money(sheet_prices[m])} | {money(total)} |"
         )
-    lines += ["", warning, "", "## Cutting list", ""]
-    lines.append(
+    lines += ["", warning]
+    cutting = [
         f"Each sheet is trimmed {size(edge_trim)}cm on every edge, leaving "
         f"{size(usable_length)} × {size(usable_width)}cm. Rip the strips across the "
         f"sheet in order, then crosscut each strip. Every part's length runs along "
         f"the grain. Saw cut {size(kerf)}cm."
-    )
+    ]
     sheets_dir.mkdir(parents=True, exist_ok=True)
     for old in sheets_dir.glob("*.svg"):
         old.unlink()
@@ -318,18 +320,18 @@ def write_materials(
         for sheet in range(counts[m]):
             on_sheet = [p for p in packings[m] if p.sheet == sheet]
             title = f"{m} sheet {sheet + 1} of {counts[m]}"
-            lines += ["", f"### {title[0].upper()}{title[1:]}", ""]
+            cutting += ["", f"### {title[0].upper()}{title[1:]}", ""]
             strip_ids = list(dict.fromkeys(p.strip for p in on_sheet))
             for n, strip in enumerate(strip_ids, 1):
                 in_strip = [p for p in on_sheet if p.strip == strip]
-                lines.append(f"{n}. Rip a {size(in_strip[0].strip_width)}cm strip:")
+                cutting.append(f"{n}. Rip a {size(in_strip[0].strip_width)}cm strip:")
                 for p in in_strip:
                     extra = (
                         f", then rip to {size(p.part.width)}cm"
                         if p.part.width < p.strip_width - eps
                         else ""
                     )
-                    lines.append(
+                    cutting.append(
                         f"   - crosscut {size(p.part.length)}cm: {p.part.label}{extra}"
                     )
             diagram = sheets_dir / f"{slug}_{sheet + 1}.svg"
@@ -339,11 +341,11 @@ def write_materials(
             diagram.write_text(svg_file(body, w, h))
             stacked.append(f'<g transform="translate(0 {stacked_h})">\n{body}\n</g>')
             stacked_w, stacked_h = max(stacked_w, w), stacked_h + h
-            lines.append(f"\nDiagram: `sheets/{diagram.name}`")
+            cutting.append(f"\nDiagram: `sheets/{diagram.name}`")
     (sheets_dir / "all.svg").write_text(
         svg_file("\n".join(stacked), stacked_w, stacked_h)
     )
-    lines.append("\nAll sheets stacked: `sheets/all.svg`")
+    cutting.append("\nAll sheets stacked: `sheets/all.svg`")
 
     lines += [
         "",
@@ -357,8 +359,9 @@ def write_materials(
         cost = hardware_cost(row)
         hardware_total += cost
         packs = math.ceil(row.quantity / row.pack_size)
+        item = f"[{row.item}]({row.url})" if row.url else row.item
         lines.append(
-            f"| {row.item} | {row.spec} | {row.quantity} | {packs} × {row.pack_size} | "
+            f"| {item} | {row.spec} | {row.quantity} | {packs} × {row.pack_size} | "
             f"{money(cost)} |"
         )
     cut_total = cuts * cut_price
@@ -372,7 +375,9 @@ def write_materials(
         "| | Estimate |",
         "| - | -------: |",
         f"| Sheets | {money(sheet_total)} |",
-        f"| Cutting ({cuts} cuts at {money(cut_price)}) | {money(cut_total)} |",
+        f"| Cutting ({cuts} cuts at {money(cut_price)}) | {money(cut_total)} |"
+        if cut_price
+        else f"| Cutting ({cuts} cuts, own plunge saw) | €0.00 |",
         f"| Hardware and finish | {money(hardware_total)} |",
         f"| Delivery | {money(delivery_price)} |",
         f"| **Total** | **{money(total)}**"
@@ -382,4 +387,4 @@ def write_materials(
         "",
     ]
     path.write_text("\n".join(lines))
-    return counts
+    return counts, cutting

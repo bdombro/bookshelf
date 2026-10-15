@@ -18,15 +18,18 @@ cabinet_shelf_depth = 25  # leaves room at the front for hinges
 door_gap = 0.4  # between the pair, and split above and below
 shelves_above_cabinet = 3  # 4 open compartments
 narrow_lower_shelves = 1  # below the cabinet top line in narrow units
-confirmat_spacing = 12  # max gap between confirmats along a joint
+pocket_spacing = 15  # max gap between pocket screws; 2 per end on 29.5cm shelves
 staple_spacing = 12.5
 bolts_per_joint = 4
 toggles_per_bracket = 2
-finish_coats = 2
-finish_coverage = 12  # m² per litre per coat
+finish_coats = 1
+finish_coverage = 8  # m² per litre per coat; bare pine soaks up the first coat
 hinge_from_door_end = 10  # hinge cup center from door top and bottom
 knob_from_door_edge = 4  # knob center from the door's inner edge
 knob_from_door_top = 6
+sanding_coverage = 5  # m² per sponge, light sand of factory-smooth pine
+roller_coverage = 6  # m² per sleeve per coat before it sheds or drags
+kit_sleeves = 1  # assumed; the listing doesn't say
 
 # --- Layout ---
 layout = ["narrow", "wide", "fireplace", "wide", "narrow"]
@@ -41,18 +44,36 @@ kerf = 0.3  # saw width; confirm with the cutter
 # --- Prices (€, estimates until quoted) ---
 pine_sheet_price = 98.40
 birch_sheet_price = 65.99
-cut_price = 1.0  # estimate; Strahan quote pending
+cut_price = 0  # own plunge saw; 0 shows as €0
 delivery_price = 0  # 0 shows as unknown
 hinge_pack = (2, 10.0)  # (pieces, price)
 knob_pack = (1, 3.0)
-confirmat_pack = (100, 12.0)
-drill_bit_pack = (1, 10.0)
+pocket_jig_pack = (1, 0.0)  # Gunpla twin jig kit, €18.55, already bought
+screw_pack = (100, 0.0)  # 4 × 40mm countersunk wood screws, already owned
+washer_pack = (100, 0.0)  # M4 flat washers, already owned
+plug_pack = (50, 7.99)  # Shiwaki pine, 9.5mm
 staple_pack = (1000, 8.0)
 glue_pack = (1, 12.0)  # 1L bottle
 bolt_pack = (4, 4.0)
 bracket_pack = (1, 4.0)
 toggle_pack = (10, 10.0)
-finish_pack = (1, 15.0)  # (litres, price)
+finish_pack = (
+    0.75,
+    21.91,
+)  # (litres, price); Ronseal Interior Varnish, TJ O'Mahony sale price
+brush_pack = (1, 4.95)  # Screwfix 173FM
+sanding_pack = (3, 6.85)  # Screwfix 421VV
+roller_pack = (1, 5.65)  # Axus Blonde mini roller kit, sale price
+sleeve_pack = (10, 9.72)  # Axus Blonde 101mm sleeves, sale price
+
+# --- Links ---
+brush_url = "https://www.screwfix.ie/p/synthetic-paint-brush-3-/173fm"
+pocket_jig_url = "https://www.amazon.ie/dp/B0BGWRQYNC"
+plug_url = "https://www.amazon.ie/dp/B09P53GBG9"
+finish_url = "https://tjomahony.ie/rn-int-varnish-antique-pine-satin-750ml-7536837.html"
+roller_url = "https://tjomahony.ie/axus-blonde-100-natural-wool-mini-roller-kit-78axu-rkbln4.html"
+sanding_url = "https://www.screwfix.ie/p/bosch-expert-superfine-fine-medium-grit-multi-material-hand-sanding-sponges-97mm-x-67mm-3-pack/421vv"
+sleeve_url = "https://tjomahony.ie/axus-blonde-100-natural-wool-mini-sleeve-pack-of-10-4-101mm-78axu-rbln410.html"
 
 # --- Viewer ---
 hide_doors = False

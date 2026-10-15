@@ -20,13 +20,14 @@ def write_instructions(
     height: float,
     depth: float,
     kickboard_setback: float,
-    confirmat_spacing: float,
+    pocket_spacing: float,
     staple_spacing: float,
     door_gap: float,
     hinge_from_door_end: float,
     knob_from_door_edge: float,
     knob_from_door_top: float,
     kerf: float,
+    cutting_list: list[str],
     bolt_heights: list[float],
     layout: list[str],
 ) -> None:
@@ -46,11 +47,17 @@ def write_instructions(
         "",
         f"Layout, left to right: {sets}. Units: {', '.join(units)}.",
         "",
-        "## 1. Order",
+        "## 1. Cut",
         "",
-        "Submit the cutting list and sheet diagrams from `materials.md` and `sheets/`.",
-        f"⚠️ The layout assumes a {size(kerf * 10)}mm saw cut: confirm the cutter's saw "
-        "width first and rebuild if it differs.",
+        "Follow the cutting list below and the diagrams in `sheets/`. With "
+        "a plunge saw: lay each sheet on rigid foam insulation so both sides of every "
+        "cut are supported, use about 2.6m of joined track for the full-length rips "
+        "and 213cm crosscuts, and tape the cut lines or score first to stop "
+        "splintering.",
+        f"⚠️ The layout assumes a {size(kerf * 10)}mm saw cut: check your blade's width "
+        "and rebuild if it's wider.",
+        "",
+        *cutting_list,
         "",
         "## 2. Check and label",
         "",
@@ -77,6 +84,20 @@ def write_instructions(
         "finish while panels are flat. Tape off glue areas: panel ends, the rear "
         "edges the back is glued to, and the shelf lines on the sides. Test on an "
         "offcut first.",
+        "",
+        "For water-based varnish:",
+        "",
+        "1. Wipe with a damp cloth to raise the grain; once dry, sand at 240.",
+        "2. Stir the can; don't shake it.",
+        "3. Roll an even coat with the wool mini roller; swap to a fresh sleeve "
+        "when it starts to drag or shed.",
+        "4. Tip off at once: drag a near-dry wide synthetic brush lightly along the "
+        "grain, end to end in one stroke on long panels.",
+        "5. Don't go back over areas that have started to set.",
+        "6. Brush the edges.",
+        "7. Coat both faces equally so panels don't cup.",
+        "",
+        "Hardwax oil is wiped on thin and buffed off, not rolled.",
         "",
         "## 4. Mark shelf lines",
         "",
@@ -113,43 +134,53 @@ def write_instructions(
 
     lines += [
         "",
-        "## 5. Drill for confirmats",
+        "## 5. Drill pocket holes",
         "",
-        f"Uses: {counts['Confirmat screws']} confirmat screws, stepped drill bit.",
+        "Uses: pocket hole jig.",
         "",
-        f"Drill through each side into the middle of each panel's end, on its line, "
-        f"at most {size(confirmat_spacing)}cm apart. Positions from the side's front "
-        "edge:",
+        "Set the jig for 24mm stock. Drill into each end of every panel that sits "
+        "between the sides, on its hidden face: the underside of the bottom, cabinet "
+        "top, cabinet shelf and open shelves, the top face of the top, the back face "
+        f"of the kickboard. At most {size(pocket_spacing)}cm apart. Positions from "
+        "the panel's front edge:",
         "",
     ]
     for width in sorted(
         {p.width for p in parts if p.name in ("shelf", "cabinet_shelf")}
     ):
-        n = max(2, math.ceil(width / confirmat_spacing))
-        start = depth - width
-        positions = ", ".join(size(start + width * (i + 0.5) / n) for i in range(n))
+        n = max(2, math.ceil(width / pocket_spacing))
+        positions = ", ".join(size(width * (i + 0.5) / n) for i in range(n))
         lines.append(f"- {size(width)}cm-deep panels: {positions}")
     kick = next(p for p in parts if p.name == "kickboard")
-    kick_n = max(2, math.ceil(kick.width / confirmat_spacing))
+    kick_n = max(2, math.ceil(kick.width / pocket_spacing))
     lines.append(
-        f"- kickboard: {kick_n} screws at heights "
+        f"- kickboard: {kick_n} per end, at "
         + " and ".join(size(kick.width * (i + 0.5) / kick_n) for i in range(kick_n))
-        + f", {size(kickboard_setback + kick.thickness / 2)}cm from the front edge"
+        + " from its bottom edge"
     )
 
     lines += [
         "",
         "## 6. Assemble each carcass",
         "",
-        "Uses: wood glue, confirmat screws.",
+        f"Uses: wood glue, {counts['Wood screws']} wood screws with washers, "
+        f"{counts['Pocket plugs']} pocket plugs.",
         "",
-        "Work on the floor with the sides on their rear edges, front edges up:",
+        "Work on the floor with the sides on their rear edges, front edges up. A "
+        "screw nudges its panel away from the pocket face as it tightens, so "
+        "a shelf with pockets underneath creeps up off its line by a millimetre or "
+        "so: clamp the panel to the side, or clamp a block on its line, before "
+        "driving. In the narrow units, "
+        "check a drill fits between the sides; if not, use a right-angle attachment "
+        "or stubby driver.",
         "",
         "1. Glue and screw the bottom and top between the two sides.",
         "2. Add the cabinet top (wide) and the shelves, each on its marked line.",
         f"3. Fit the kickboard under the bottom, {size(kickboard_setback)}cm back from "
         "the front edge.",
         "4. Leave the cabinet shelf until the back is on.",
+        "5. Glue plugs into the open shelves' pockets, sand them flush "
+        "and varnish them.",
         "",
         "## 7. Square and fix the back",
         "",
@@ -170,7 +201,7 @@ def write_instructions(
         "",
         "## 8. Cabinet shelf, hinges and doors",
         "",
-        f"Uses: {counts['Hinges']} hinges, {counts['Knobs']} knobs, confirmat screws.",
+        f"Uses: {counts['Hinges']} hinges, {counts['Knobs']} knobs, pocket screws.",
         "",
     ]
     door = next((p for p in parts if p.name == "door"), None)

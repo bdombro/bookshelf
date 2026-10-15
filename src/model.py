@@ -246,9 +246,9 @@ svg.write(build / "front.svg")
 doors = [p for p in parts if p.name == "door"]
 backs = [p for p in parts if p.name == "back"]
 horizontals = [p for p in parts if p.name not in ("side", "door", "back")]
-confirmats = sum(
-    2 * max(2, math.ceil(p.width / config.confirmat_spacing)) for p in horizontals
-)
+pockets = {
+    p.label: 2 * max(2, math.ceil(p.width / config.pocket_spacing)) for p in horizontals
+}
 staple_length = sum(
     2 * (b.length + b.width)
     + b.width
@@ -259,7 +259,7 @@ staple_length = sum(
     for b in backs
 )
 pine_area = sum(p.length * p.width for p in parts if p.material == pine) * 2 / 10_000
-finish_litres = math.ceil(pine_area * config.finish_coats / config.finish_coverage)
+finish_litres = round(pine_area * config.finish_coats / config.finish_coverage, 1)
 unit_count = sum(counts.values())
 
 
@@ -272,12 +272,35 @@ hardware = [
     ),
     Hardware("Knobs", "one per door", len(doors), *config.knob_pack),
     Hardware(
-        "Confirmat screws",
-        "7 × 60mm, for butt joints",
-        confirmats,
-        *config.confirmat_pack,
+        "Wood screws",
+        "4 × 40mm countersunk, coarse thread, one per pocket",
+        sum(pockets.values()),
+        *config.screw_pack,
     ),
-    Hardware("Stepped drill bit", "matching the confirmats", 1, *config.drill_bit_pack),
+    Hardware(
+        "Washers",
+        "M4 flat, under each pocket screw head",
+        sum(pockets.values()),
+        *config.washer_pack,
+    ),
+    Hardware(
+        "Pocket plugs",
+        "for open shelf pockets in view",
+        sum(
+            n
+            for label, n in pockets.items()
+            if label.split(" / ")[1].startswith("shelf")
+        ),
+        *config.plug_pack,
+        config.plug_url,
+    ),
+    Hardware(
+        "Pocket hole jig",
+        "Gunpla twin kit, set for 24mm",
+        1,
+        *config.pocket_jig_pack,
+        config.pocket_jig_url,
+    ),
     Hardware(
         "Staples",
         "narrow crown, 16–19mm legs",
@@ -299,14 +322,47 @@ hardware = [
         *config.toggle_pack,
     ),
     Hardware(
-        "Clear finish (litres)",
-        f"water-based or hardwax oil, {config.finish_coats} coats, both faces",
+        "Varnish (litres)",
+        f"Ronseal Antique Pine satin, {config.finish_coats} coat, both faces",
         finish_litres,
         *config.finish_pack,
+        config.finish_url,
+    ),
+    Hardware(
+        "Roller kit",
+        "Axus Blonde natural wool mini, 101mm",
+        1,
+        *config.roller_pack,
+        config.roller_url,
+    ),
+    Hardware(
+        "Roller sleeves",
+        f"refills beyond the kit's {config.kit_sleeves}",
+        max(
+            0,
+            math.ceil(pine_area * config.finish_coats / config.roller_coverage)
+            - config.kit_sleeves,
+        ),
+        *config.sleeve_pack,
+        config.sleeve_url,
+    ),
+    Hardware(
+        "Brush",
+        "Screwfix 173FM synthetic, 3 inch",
+        1,
+        *config.brush_pack,
+        config.brush_url,
+    ),
+    Hardware(
+        "Sanding sponges",
+        "Bosch Expert 421VV, superfine/fine/medium",
+        math.ceil(pine_area / config.sanding_coverage),
+        *config.sanding_pack,
+        config.sanding_url,
     ),
 ]
 
-sheet_counts = materials.write_materials(
+sheet_counts, cutting_list = materials.write_materials(
     parts,
     hardware,
     build / "materials.md",
@@ -338,13 +394,14 @@ instructions.write_instructions(
     config.height,
     config.depth,
     config.kickboard_setback,
-    config.confirmat_spacing,
+    config.pocket_spacing,
     config.staple_spacing,
     config.door_gap,
     config.hinge_from_door_end,
     config.knob_from_door_edge,
     config.knob_from_door_top,
     config.kerf,
+    cutting_list,
     bolt_heights,
     config.layout,
 )
