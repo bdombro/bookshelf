@@ -34,28 +34,31 @@ from materials import Hardware, Part
 
 eps = 1e-6  # rounds float halves like 107.85 up
 t = config.pine_thickness
+s = config.thin_pine_thickness
 door_bottom = config.kickboard_height + config.door_gap / 2
 door_top = config.cabinet_height - config.door_gap / 2
 door_height = door_top - door_bottom
 cabinet_top_bottom = config.cabinet_height - t
+cabinet_line_bottom = config.cabinet_height - s  # narrow shelf level with cabinet top
 top_bottom = config.height - t
 upper_clear = (
-    top_bottom - config.cabinet_height - config.shelves_above_cabinet * t
+    top_bottom - config.cabinet_height - config.shelves_above_cabinet * s
 ) / (config.shelves_above_cabinet + 1)
 upper_shelves = [
-    config.cabinet_height + (i + 1) * upper_clear + i * t
+    config.cabinet_height + (i + 1) * upper_clear + i * s
     for i in range(config.shelves_above_cabinet)
 ]
 bottom_top = config.kickboard_height + t
-lower_clear = (cabinet_top_bottom - bottom_top - config.narrow_lower_shelves * t) / (
+lower_clear = (cabinet_line_bottom - bottom_top - config.narrow_lower_shelves * s) / (
     config.narrow_lower_shelves + 1
 )
 lower_shelves = [
-    bottom_top + (i + 1) * lower_clear + i * t
+    bottom_top + (i + 1) * lower_clear + i * s
     for i in range(config.narrow_lower_shelves)
 ]
 widths = {"wide": config.wide_width, "narrow": config.narrow_width}
 pine = f"{materials.size(t * 10)}mm laminated pine"
+thin_pine = f"{materials.size(s * 10)}mm laminated pine"
 birch = f"{materials.size(config.back_thickness * 10)}mm birch plywood"
 usable_length = config.sheet_length - 2 * config.edge_trim
 usable_width = config.sheet_width - 2 * config.edge_trim
@@ -88,14 +91,14 @@ def unit(width: float, cabinet: bool) -> list[Box]:
     shelves = (
         upper_shelves
         if cabinet
-        else [*lower_shelves, cabinet_top_bottom, *upper_shelves]
+        else [*lower_shelves, cabinet_line_bottom, *upper_shelves]
     )
     parts = [
         panel("side_1", 0, 0, 0, t, config.depth, config.height),
         panel("side_2", width - t, 0, 0, t, config.depth, config.height),
         *(panel(n, t, 0, z, inner, config.depth, t) for n, z in horizontal),
         *(
-            panel(f"shelf_{i}", t, 0, z, inner, config.depth, t)
+            panel(f"shelf_{i}", t, 0, z, inner, config.depth, s)
             for i, z in enumerate(shelves, 1)
         ),
         panel("top", t, 0, top_bottom, inner, config.depth, t),
@@ -105,7 +108,7 @@ def unit(width: float, cabinet: bool) -> list[Box]:
             config.kickboard_setback,
             0,
             inner,
-            t,
+            s,
             config.kickboard_height,
         ),
         panel("back", 0, config.depth, 0, width, config.back_thickness, config.height),
@@ -121,18 +124,18 @@ def unit(width: float, cabinet: bool) -> list[Box]:
                     z,
                     inner,
                     config.cabinet_shelf_depth,
-                    t,
+                    s,
                 )
                 for z in lower_shelves
             ),
-            panel("door_1", 0, -t, door_bottom, door_width, t, door_height),
+            panel("door_1", 0, -s, door_bottom, door_width, s, door_height),
             panel(
                 "door_2",
                 width - door_width,
-                -t,
+                -s,
                 door_bottom,
                 door_width,
-                t,
+                s,
                 door_height,
             ),
         ]
@@ -172,7 +175,11 @@ for kind in config.layout:
                 length=length,
                 width=width,
                 thickness=thickness,
-                material=birch if label == "back" else pine,
+                material=birch
+                if label == "back"
+                else pine
+                if abs(thickness - t) < eps
+                else thin_pine,
                 bottom=round(box.min.Z / CM + eps, 1),
                 top=round(box.max.Z / CM + eps, 1),
             )
@@ -193,7 +200,7 @@ joints = sum(a != "fireplace" and b != "fireplace" for a, b in pairwise(config.l
 errors = []
 expected = (
     sum(widths[k] for k in config.layout if k != "fireplace") + config.fireplace_width,
-    config.depth + config.back_thickness + t,
+    config.depth + config.back_thickness + s,
     config.height,
 )
 actual = assembly.bounding_box().size / CM
@@ -249,6 +256,7 @@ horizontals = [p for p in parts if p.name not in ("side", "door", "back")]
 pockets = {
     p.label: 2 * max(2, math.ceil(p.width / config.pocket_spacing)) for p in horizontals
 }
+thin_labels = {p.label for p in horizontals if p.material == thin_pine}
 staple_length = sum(
     2 * (b.length + b.width)
     + b.width
@@ -258,7 +266,7 @@ staple_length = sum(
     )
     for b in backs
 )
-pine_area = sum(p.length * p.width for p in parts if p.material == pine) * 2 / 10_000
+pine_area = sum(p.length * p.width for p in parts if p.material != birch) * 2 / 10_000
 finish_litres = round(pine_area * config.finish_coats / config.finish_coverage, 1)
 unit_count = sum(counts.values())
 
@@ -266,16 +274,23 @@ unit_count = sum(counts.values())
 hardware = [
     Hardware(
         "Hinges",
-        f"soft-close 35mm concealed full overlay, rated for {pine[:4]} doors",
+        f"Hafele 110° soft-close full overlay, rated 14–22mm for {thin_pine[:4]} doors",
         2 * len(doors),
         *config.hinge_pack,
+        config.hinge_url,
     ),
     Hardware("Knobs", "one per door", len(doors), *config.knob_pack),
     Hardware(
         "Wood screws",
-        "4 × 40mm countersunk, coarse thread, one per pocket",
-        sum(pockets.values()),
+        f"4 × 40mm countersunk, coarse thread, one per pocket in {pine[:4]} panels",
+        sum(n for label, n in pockets.items() if label not in thin_labels),
         *config.screw_pack,
+    ),
+    Hardware(
+        "Short wood screws",
+        f"4 × 30mm countersunk, one per pocket in {thin_pine[:4]} panels",
+        sum(n for label, n in pockets.items() if label in thin_labels),
+        *config.short_screw_pack,
     ),
     Hardware(
         "Washers",
@@ -296,7 +311,7 @@ hardware = [
     ),
     Hardware(
         "Pocket hole jig",
-        "Gunpla twin kit, set for 24mm",
+        f"Gunpla twin kit, set for {pine[:4]} and {thin_pine[:4]}",
         1,
         *config.pocket_jig_pack,
         config.pocket_jig_url,
@@ -371,7 +386,11 @@ sheet_counts, cutting_list = materials.write_materials(
     config.sheet_width,
     config.edge_trim,
     config.kerf,
-    {pine: config.pine_sheet_price, birch: config.birch_sheet_price},
+    {
+        pine: config.pine_sheet_price,
+        thin_pine: config.thin_pine_sheet_price,
+        birch: config.birch_sheet_price,
+    },
     config.cut_price,
     config.delivery_price,
 )

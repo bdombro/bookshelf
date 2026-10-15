@@ -138,11 +138,26 @@ def write_instructions(
         "",
         "Uses: pocket hole jig.",
         "",
-        "Set the jig for 24mm stock. Drill into each end of every panel that sits "
-        "between the sides, on its hidden face: the underside of the bottom, cabinet "
-        "top, cabinet shelf and open shelves, the top face of the top, the back face "
-        f"of the kickboard. At most {size(pocket_spacing)}cm apart. Positions from "
-        "the panel's front edge:",
+        "Set the jig and the bit's depth collar to each panel's thickness: "
+        + ", ".join(
+            f"{size(thickness * 10)}mm for "
+            + ", ".join(
+                dict.fromkeys(
+                    p.name
+                    for p in parts
+                    if p.thickness == thickness
+                    and p.name not in ("side", "back", "door")
+                )
+            )
+            for thickness in sorted(
+                {p.thickness for p in parts if p.name not in ("side", "back", "door")},
+                reverse=True,
+            )
+        )
+        + ". Drill into each end of every panel that sits between the sides, on its "
+        "hidden face: the underside of the bottom, cabinet top, cabinet shelf and "
+        "open shelves, the top face of the top, the back face of the kickboard. At "
+        f"most {size(pocket_spacing)}cm apart. Positions from the panel's front edge:",
         "",
     ]
     for width in sorted(
@@ -163,8 +178,12 @@ def write_instructions(
         "",
         "## 6. Assemble each carcass",
         "",
-        f"Uses: wood glue, {counts['Wood screws']} wood screws with washers, "
+        f"Uses: wood glue, {counts['Wood screws']} wood screws and "
+        f"{counts['Short wood screws']} short wood screws, each with a washer, "
         f"{counts['Pocket plugs']} pocket plugs.",
+        "",
+        "Use the short screws in the thinner panels: a long one can break out through "
+        "the outside face of the side.",
         "",
         "Work on the floor with the sides on their rear edges, front edges up. A "
         "screw nudges its panel away from the pocket face as it tightens, so "
@@ -201,7 +220,8 @@ def write_instructions(
         "",
         "## 8. Cabinet shelf, hinges and doors",
         "",
-        f"Uses: {counts['Hinges']} hinges, {counts['Knobs']} knobs, pocket screws.",
+        f"Uses: {counts['Hinges']} hinges, {counts['Knobs']} knobs, short wood screws "
+        "with washers.",
         "",
     ]
     door = next((p for p in parts if p.name == "door"), None)

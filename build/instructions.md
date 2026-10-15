@@ -11,85 +11,90 @@ Follow the cutting list below and the diagrams in `sheets/`. With a plunge saw: 
 
 Each sheet is trimmed 0.5cm on every edge, leaving 243 × 121cm. Rip the strips across the sheet in order, then crosscut each strip. Every part's length runs along the grain. Saw cut 0.3cm.
 
-### 24mm laminated pine sheet 1 of 4
+### 24mm laminated pine sheet 1 of 3
 
 1. Rip a 29.5cm strip:
    - crosscut 213cm: narrow_1 / side_1
    - crosscut 27.2cm: narrow_1 / bottom
 2. Rip a 29.5cm strip:
    - crosscut 213cm: narrow_1 / side_2
-   - crosscut 27.2cm: narrow_1 / shelf_1
+   - crosscut 27.2cm: narrow_1 / top
 3. Rip a 29.5cm strip:
    - crosscut 213cm: wide_1 / side_1
-   - crosscut 27.2cm: narrow_1 / shelf_2
+   - crosscut 27.2cm: narrow_2 / bottom
 4. Rip a 29.5cm strip:
    - crosscut 213cm: wide_1 / side_2
-   - crosscut 27.2cm: narrow_1 / shelf_3
+   - crosscut 27.2cm: narrow_2 / top
 
 Diagram: `sheets/24mm_laminated_pine_1.svg`
 
-### 24mm laminated pine sheet 2 of 4
+### 24mm laminated pine sheet 2 of 3
 
 1. Rip a 29.5cm strip:
    - crosscut 213cm: wide_2 / side_1
-   - crosscut 27.2cm: narrow_1 / shelf_4
 2. Rip a 29.5cm strip:
    - crosscut 213cm: wide_2 / side_2
-   - crosscut 27.2cm: narrow_1 / shelf_5
 3. Rip a 29.5cm strip:
    - crosscut 213cm: narrow_2 / side_1
-   - crosscut 27.2cm: narrow_1 / top
 4. Rip a 29.5cm strip:
    - crosscut 213cm: narrow_2 / side_2
-   - crosscut 27.2cm: narrow_2 / bottom
 
 Diagram: `sheets/24mm_laminated_pine_2.svg`
 
-### 24mm laminated pine sheet 3 of 4
+### 24mm laminated pine sheet 3 of 3
 
 1. Rip a 29.5cm strip:
    - crosscut 78.8cm: wide_1 / bottom
    - crosscut 78.8cm: wide_1 / cabinet_top
-   - crosscut 78.8cm: wide_1 / shelf_1
-2. Rip a 29.5cm strip:
-   - crosscut 78.8cm: wide_1 / shelf_2
-   - crosscut 78.8cm: wide_1 / shelf_3
    - crosscut 78.8cm: wide_1 / top
-3. Rip a 29.5cm strip:
+2. Rip a 29.5cm strip:
    - crosscut 78.8cm: wide_2 / bottom
    - crosscut 78.8cm: wide_2 / cabinet_top
-   - crosscut 78.8cm: wide_2 / shelf_1
-4. Rip a 29.5cm strip:
-   - crosscut 78.8cm: wide_2 / shelf_2
-   - crosscut 78.8cm: wide_2 / shelf_3
    - crosscut 78.8cm: wide_2 / top
 
 Diagram: `sheets/24mm_laminated_pine_3.svg`
 
-### 24mm laminated pine sheet 4 of 4
+### 18mm laminated pine sheet 1 of 2
 
-1. Rip a 25cm strip:
-   - crosscut 78.8cm: wide_1 / cabinet_shelf
-   - crosscut 78.8cm: wide_2 / cabinet_shelf
-   - crosscut 78.8cm: wide_1 / kickboard, then rip to 10cm
-2. Rip a 10cm strip:
-   - crosscut 78.8cm: wide_2 / kickboard
-   - crosscut 27.2cm: narrow_1 / kickboard
-   - crosscut 27.2cm: narrow_2 / kickboard
+1. Rip a 29.5cm strip:
+   - crosscut 78.8cm: wide_2 / shelf_1
+   - crosscut 27.2cm: narrow_2 / shelf_3
+   - crosscut 78.8cm: wide_1 / shelf_1
+   - crosscut 27.2cm: narrow_2 / shelf_4
+   - crosscut 27.2cm: narrow_1 / kickboard, then rip to 10cm
+2. Rip a 29.5cm strip:
+   - crosscut 78.8cm: wide_1 / shelf_3
+   - crosscut 27.2cm: narrow_1 / shelf_2
+   - crosscut 78.8cm: wide_2 / kickboard, then rip to 10cm
+   - crosscut 27.2cm: narrow_1 / shelf_5
+   - crosscut 27.2cm: narrow_1 / shelf_1
 3. Rip a 41.6cm strip:
    - crosscut 76.6cm: wide_1 / door_1
-   - crosscut 76.6cm: wide_1 / door_2
-   - crosscut 76.6cm: wide_2 / door_1
-4. Rip a 41.6cm strip:
-   - crosscut 76.6cm: wide_2 / door_2
+   - crosscut 78.8cm: wide_2 / shelf_3, then rip to 29.5cm
    - crosscut 27.2cm: narrow_2 / shelf_1, then rip to 29.5cm
-   - crosscut 27.2cm: narrow_2 / shelf_2, then rip to 29.5cm
-   - crosscut 27.2cm: narrow_2 / shelf_3, then rip to 29.5cm
-   - crosscut 27.2cm: narrow_2 / shelf_4, then rip to 29.5cm
+   - crosscut 27.2cm: narrow_1 / shelf_4, then rip to 29.5cm
    - crosscut 27.2cm: narrow_2 / shelf_5, then rip to 29.5cm
-   - crosscut 27.2cm: narrow_2 / top, then rip to 29.5cm
 
-Diagram: `sheets/24mm_laminated_pine_4.svg`
+Diagram: `sheets/18mm_laminated_pine_1.svg`
+
+### 18mm laminated pine sheet 2 of 2
+
+1. Rip a 29.5cm strip:
+   - crosscut 27.2cm: narrow_2 / shelf_2
+   - crosscut 78.8cm: wide_1 / shelf_2
+   - crosscut 78.8cm: wide_1 / cabinet_shelf, then rip to 25cm
+   - crosscut 27.2cm: narrow_1 / shelf_3
+   - crosscut 27.2cm: narrow_2 / kickboard, then rip to 10cm
+2. Rip a 41.6cm strip:
+   - crosscut 76.6cm: wide_1 / door_2
+   - crosscut 78.8cm: wide_2 / shelf_2, then rip to 29.5cm
+   - crosscut 78.8cm: wide_1 / kickboard, then rip to 10cm
+3. Rip a 41.6cm strip:
+   - crosscut 76.6cm: wide_2 / door_1
+   - crosscut 78.8cm: wide_2 / cabinet_shelf, then rip to 25cm
+   - crosscut 76.6cm: wide_2 / door_2
+
+Diagram: `sheets/18mm_laminated_pine_2.svg`
 
 ### 4mm birch plywood sheet 1 of 2
 
@@ -119,19 +124,19 @@ Count the panels against this list, then pencil each part's name on an edge that
 | ---- | --------- | --: | ---- |
 | side | narrow | 4 | 213 × 29.5 × 2.4 |
 | bottom | narrow | 2 | 27.2 × 29.5 × 2.4 |
-| shelf | narrow | 10 | 27.2 × 29.5 × 2.4 |
+| shelf | narrow | 10 | 27.2 × 29.5 × 1.8 |
 | top | narrow | 2 | 27.2 × 29.5 × 2.4 |
-| kickboard | narrow | 2 | 27.2 × 10 × 2.4 |
+| kickboard | narrow | 2 | 27.2 × 10 × 1.8 |
 | back | narrow | 2 | 213 × 32 × 0.4 |
 | side | wide | 4 | 213 × 29.5 × 2.4 |
 | bottom | wide | 2 | 78.8 × 29.5 × 2.4 |
 | cabinet_top | wide | 2 | 78.8 × 29.5 × 2.4 |
-| shelf | wide | 6 | 78.8 × 29.5 × 2.4 |
+| shelf | wide | 6 | 78.8 × 29.5 × 1.8 |
 | top | wide | 2 | 78.8 × 29.5 × 2.4 |
-| kickboard | wide | 2 | 78.8 × 10 × 2.4 |
+| kickboard | wide | 2 | 78.8 × 10 × 1.8 |
 | back | wide | 2 | 213 × 83.6 × 0.4 |
-| cabinet_shelf | wide | 2 | 78.8 × 25 × 2.4 |
-| door | wide | 4 | 76.6 × 41.6 × 2.4 |
+| cabinet_shelf | wide | 2 | 78.8 × 25 × 1.8 |
+| door | wide | 4 | 76.6 × 41.6 × 1.8 |
 
 ## 3. Sand and finish
 
@@ -157,33 +162,33 @@ Heights from the bottom of the side (the floor). Mark each pair of sides togethe
 
 | Panel | Underside | Top | Depth from front |
 | ----- | --------: | --: | ---------------- |
-| kickboard | 0 | 10 | 5–7.4 |
+| kickboard | 0 | 10 | 5–6.8 |
 | bottom | 10 | 12.4 | 0–29.5 |
-| shelf_1 | 47.3 | 49.7 | 0–29.5 |
-| shelf_2 | 84.6 | 87 | 0–29.5 |
-| shelf_3 | 116.1 | 118.5 | 0–29.5 |
-| shelf_4 | 147.6 | 150 | 0–29.5 |
-| shelf_5 | 179.1 | 181.5 | 0–29.5 |
+| shelf_1 | 47.9 | 49.7 | 0–29.5 |
+| shelf_2 | 85.2 | 87 | 0–29.5 |
+| shelf_3 | 116.6 | 118.4 | 0–29.5 |
+| shelf_4 | 147.9 | 149.7 | 0–29.5 |
+| shelf_5 | 179.3 | 181.1 | 0–29.5 |
 | top | 210.6 | 213 | 0–29.5 |
 
 ### Wide (83.6cm)
 
 | Panel | Underside | Top | Depth from front |
 | ----- | --------: | --: | ---------------- |
-| kickboard | 0 | 10 | 5–7.4 |
+| kickboard | 0 | 10 | 5–6.8 |
 | bottom | 10 | 12.4 | 0–29.5 |
-| cabinet_shelf | 47.3 | 49.7 | 4.5–29.5 |
+| cabinet_shelf | 47.9 | 49.7 | 4.5–29.5 |
 | cabinet_top | 84.6 | 87 | 0–29.5 |
-| shelf_1 | 116.1 | 118.5 | 0–29.5 |
-| shelf_2 | 147.6 | 150 | 0–29.5 |
-| shelf_3 | 179.1 | 181.5 | 0–29.5 |
+| shelf_1 | 116.6 | 118.4 | 0–29.5 |
+| shelf_2 | 147.9 | 149.7 | 0–29.5 |
+| shelf_3 | 179.3 | 181.1 | 0–29.5 |
 | top | 210.6 | 213 | 0–29.5 |
 
 ## 5. Drill pocket holes
 
 Uses: pocket hole jig.
 
-Set the jig for 24mm stock. Drill into each end of every panel that sits between the sides, on its hidden face: the underside of the bottom, cabinet top, cabinet shelf and open shelves, the top face of the top, the back face of the kickboard. At most 15cm apart. Positions from the panel's front edge:
+Set the jig and the bit's depth collar to each panel's thickness: 24mm for bottom, top, cabinet_top, 18mm for shelf, kickboard, cabinet_shelf. Drill into each end of every panel that sits between the sides, on its hidden face: the underside of the bottom, cabinet top, cabinet shelf and open shelves, the top face of the top, the back face of the kickboard. At most 15cm apart. Positions from the panel's front edge:
 
 - 25cm-deep panels: 6.2, 18.8
 - 29.5cm-deep panels: 7.4, 22.1
@@ -191,7 +196,9 @@ Set the jig for 24mm stock. Drill into each end of every panel that sits between
 
 ## 6. Assemble each carcass
 
-Uses: wood glue, 128 wood screws with washers, 64 pocket plugs.
+Uses: wood glue, 40 wood screws and 88 short wood screws, each with a washer, 64 pocket plugs.
+
+Use the short screws in the thinner panels: a long one can break out through the outside face of the side.
 
 Work on the floor with the sides on their rear edges, front edges up. A screw nudges its panel away from the pocket face as it tightens, so a shelf with pockets underneath creeps up off its line by a millimetre or so: clamp the panel to the side, or clamp a block on its line, before driving. In the narrow units, check a drill fits between the sides; if not, use a right-angle attachment or stubby driver.
 
@@ -214,9 +221,9 @@ Pencil the shelf lines on the back, then glue and staple it to the rear edges of
 
 ## 8. Cabinet shelf, hinges and doors
 
-Uses: 8 hinges, 4 knobs, pocket screws.
+Uses: 8 hinges, 4 knobs, short wood screws with washers.
 
-1. Fix the cabinet shelf against the back with its underside at 47.3, leaving 4.5cm at the front for the hinges.
+1. Fix the cabinet shelf against the back with its underside at 47.9, leaving 4.5cm at the front for the hinges.
 2. Drill each door's hinge cups 10cm from its top and bottom ends, using the hinge maker's template for the edge distance.
 3. Mount the plates on the sides to match: door bottom at 10.2, top at 86.8.
 4. Hang the doors and adjust for an even 0.4cm gap between the pair.
@@ -228,5 +235,5 @@ Uses: 8 connector bolts, 4 anti-tip brackets, 8 plasterboard toggles.
 
 1. Remove the skirting boards.
 2. Stand each unit up with two people; a wide unit is a two-person lift.
-3. Bolt each set's two units together through their touching sides, 14.8cm from the front edge, at heights 29.8, 101.5, 133.1, 196.1.
+3. Bolt each set's two units together through their touching sides, 14.8cm from the front edge, at heights 30.1, 101.8, 133.2, 195.8.
 4. Fix each unit's anti-tip bracket through its top panel into a stud wherever possible (find them with a stud finder). Where there's no stud use spring or snap toggles, never plain plugs. A narrow unit tips very easily: never skip this.

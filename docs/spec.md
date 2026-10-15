@@ -32,13 +32,14 @@ One build turns the model into everything needed to buy, cut and assemble them.
 - Four units in two sets either side of a 160cm fireplace wall: narrow, wide | fireplace
 | wide, narrow. 391.2cm overall.
 - Every unit is 213cm tall with 29.5cm-deep shelves and a recessed 10cm kickboard. The
-carcass is 29.9cm deep with the back, 32.3cm at the cabinet doors.
+carcass is 29.9cm deep with the back, 31.7cm at the cabinet doors.
 - Wide ×2: 83.6cm wide. 4 open compartments over a 2-door cabinet with an inside shelf.
 - Narrow ×2: 32cm wide. 6 open compartments, lined up with the wide units' shelves.
-- 24mm laminated pine for every panel except the backs, which are 4mm birch plywood,
-glued and stapled.
-- Estimated cost ~€769 before delivery: 4 pine and 2 birch sheets €525.58, cut at home with a
-plunge saw, hardware and finish ~€256.
+- 24mm laminated pine frame (sides, top, bottom, cabinet top); 18mm laminated pine
+shelves, cabinet shelves, doors and kickboards; 4mm birch plywood backs, glued and
+stapled.
+- Estimated cost ~€792 before delivery: 3 × 24mm pine, 2 × 18mm pine and 2 birch sheets
+€566.54, cut at home with a plunge saw, hardware and finish ~€225.
 
 **Outputs** (all in `build/`, detailed in [Outputs](#65-outputs)):
 
@@ -62,7 +63,7 @@ trimmed off each edge for squaring.
 - **Grain:** laminated pine's strips run along the sheet's 244cm length. Every pine part
 keeps its length along them: sides and doors vertical, shelves the long way.
 - **Saw width:** `config.kerf` setting, 0.3cm; plunge saw blades cut 0.22–0.28cm; the
-4-sheet layout fits either way.
+layout fits either way.
 - **Flexible sizes:** exact dimensions can change whenever that makes building, cutting
 or buying simpler. Most sizes below were picked for sheet yield.
 - **Not modeled:** hardware, wall cutouts for sockets or switches (cut by hand during
@@ -83,17 +84,22 @@ The two units in a set are bolted together through their touching sides, which m
 
 ### 3.2 Unit types
 
-All pine is 24mm, for a chunkier, built-in look.
+The frame (sides, top, bottom, cabinet top) is 24mm pine, for a chunkier, built-in
+look. Shelves, cabinet shelves, doors and kickboards are 18mm: lighter shelves inside a
+heavier frame, and doors within stock concealed hinges' 14–22mm range.
 
 - **Wide (83.6cm):** shelves are 83.6 − 2 × 2.4 = 78.8cm, so three fit end to end on a
 243cm strip. 4 open compartments over a 2-door cabinet with one inside shelf.
 - **Narrow (32cm):** shelves are 27.2cm. A 213cm side leaves ~29.7cm of its strip, so
-every side's offcut yields one narrow shelf: 8 of the 14 narrow shelves come free.
+every side's offcut yields one narrow top or bottom (all 8 are 24mm).
 6 open compartments, no doors.
 - **Depth:** sides and shelves are 29.5cm, so four strips plus saw cuts and edge trim fit
-across a sheet. The back adds 0.4cm (29.9cm) and the doors 2.4cm more (32.3cm). Sides
+across a sheet. The back adds 0.4cm (29.9cm) and the doors 1.8cm more (31.7cm). Sides
 are one depth top to bottom.
-- **Shelves:** all fixed. A 78.8cm span of 24mm pine won't visibly sag under books.
+- **Shelves:** all fixed. A 78.8cm span of 18mm pine sags about 1.1mm under a full
+shelf of books (20 lb/ft, ends simply supported), under the usual 1.3mm visible limit;
+screwed ends and the stapled back stiffen it further. Creep may roughly double it over
+years.
 - **Kickboard:** between the sides, set back 5cm for a toe recess; the bottom panel rests
 on it and the sides run to the floor.
 
@@ -102,31 +108,32 @@ on it and the sides run to the floor.
 ### 3.3 Heights
 
 Measured from the floor (the bottom of the sides). Both unit types share every height
-from the cabinet top up, so shelf lines run straight across a set.
+from the cabinet top up, so shelf lines run straight across a set. The narrow unit's
+18mm shelf at the cabinet line is level with the wide unit's 24mm cabinet top on top.
 
 
 | Panel               | Wide                     | Narrow      |
 | ------------------- | ------------------------ | ----------- |
 | Kickboard           | 0–10                     | 0–10        |
 | Bottom              | 10–12.4                  | 10–12.4     |
-| Lower shelf         | cabinet shelf, 47.3–49.7 | 47.3–49.7   |
-| Cabinet top / shelf | 84.6–87                  | 84.6–87     |
-| Shelf               | 116.1–118.5              | 116.1–118.5 |
-| Shelf               | 147.6–150                | 147.6–150   |
-| Shelf               | 179.1–181.5              | 179.1–181.5 |
+| Lower shelf         | cabinet shelf, 47.9–49.7 | 47.9–49.7   |
+| Cabinet top / shelf | 84.6–87                  | 85.2–87     |
+| Shelf               | 116.6–118.4              | 116.6–118.4 |
+| Shelf               | 147.9–149.7              | 147.9–149.7 |
+| Shelf               | 179.3–181.1              | 179.3–181.1 |
 | Top                 | 210.6–213                | 210.6–213   |
 
 
 The cabinet top is at 87cm, close to a built-in's usual 85–90cm; a door one shelf's
 length shorter than 243cm leaves room for six narrow shelves on its strip. Compartments
-are ~29.1cm clear above the cabinet top and ~34.9cm below it in the narrow units. The wide unit's cabinet shelf is 25cm deep against the back, leaving ~4.5cm at the
+are ~29.6cm clear above the cabinet top and ~35.5cm below it in the narrow units. The wide unit's cabinet shelf is 25cm deep against the back, leaving ~4.5cm at the
 front for hinges.
 
 ### 3.4 Doors
 
 Wide units only. Full overlay: outer edges flush with the outside of the sides, a 0.4cm
 gap between the pair, from 10.2cm to 86.8cm, covering the front edges of the sides,
-bottom and cabinet top. Each is 41.6 × 76.6 × 2.4cm, grain vertical, on 2 soft-close
+bottom and cabinet top. Each is 41.6 × 76.6 × 1.8cm, grain vertical, on 2 soft-close
 concealed hinges with one knob.
 
 ### 3.5 Backs
@@ -137,7 +144,8 @@ bottom and every shelf; it keeps the frame square.
 
 ### 3.6 Panel list
 
-Per unit. All pine parts are 2.4cm thick.
+Per unit. Sides, top, bottom and cabinet top are 2.4cm thick; shelves, cabinet shelf,
+kickboard and doors 1.8cm.
 
 
 | Part             | Wide (83.6cm)   | Narrow (32cm)   |
@@ -160,25 +168,27 @@ Expected figures with the defaults. Exact counts come from `build/materials.md`.
 
 ### 4.1 Sheets
 
-- 24mm laminated (edge-glued) solid pine, €98.40: 4 sheets, about 90% used.
+- 24mm laminated (edge-glued) solid pine, €98.40: 3 sheets, about 76% used (the third
+is half spare).
+- 18mm laminated pine, €69.68: 2 sheets, about 68% used.
 - 4mm BB/BB birch plywood, €65.99: 2 sheets, one set's two backs on each.
-- Sheets total €525.58, from Strahan Timber ([cutmylist.ie](https://cutmylist.ie)).
+- Sheets total €566.54, from Strahan Timber ([cutmylist.ie](https://cutmylist.ie)).
 - Measure the sheets and set the thickness settings to match; nominal thicknesses are
 often a little under.
 - Pine edges are solid wood, so no edge banding.
-- 24mm makes each unit about a third heavier than 18mm; a wide unit is a two-person lift.
+- A wide unit is still a two-person lift.
 
 
 
 ### 4.2 Cutting
 
-About 75 cuts (67 pine, 8 birch), counting a rip per strip, a crosscut per part and an
+About 79 cuts (71 pine, 8 birch), counting a rip per strip, a crosscut per part and an
 extra rip per part narrower than its strip, all done at home with a plunge saw: €0.
 Needs about 2.6m of joined track for the 244cm rips and 213cm crosscuts, and rigid foam
 insulation under each sheet.
 
 ⚠️ **Saw width:** the packing assumes a 3mm saw cut (`config.kerf`). Plunge saw blades
-cut 2.2–2.8mm, so it has margin; the 4-sheet layout also fits at 4mm. Check the blade
+cut 2.2–2.8mm, so it has margin; the layout also fits at 4mm. Check the blade
 and set `config.kerf` if it's wider.
 
 ### 4.3 Hardware and finish
@@ -188,12 +198,13 @@ Rough placeholder prices, each a setting; replace with real ones.
 
 | Item                  | Spec                                                         | Estimate  |
 | --------------------- | ------------------------------------------------------------ | --------- |
-| Hinges ×8             | soft-close 35mm concealed full overlay, rated for 24mm doors | €40       |
+| Hinges ×8             | [Hafele 110° soft-close full overlay, 2 pack](https://www.screwfix.ie/p/hafele-steel-110-soft-close-clip-on-concealed-hinges-64mm-2-pack/9205j), 14–22mm doors, 4 packs | €21.80 |
 | Knobs ×4              | one per door                                                 | €12       |
-| Wood screws ~128      | 4 × 40mm countersunk, coarse thread, already owned           | €0        |
+| Wood screws ~40       | 4 × 40mm countersunk, coarse thread, for 24mm panels, already owned | €0 |
+| Short wood screws ~88 | 4 × 30mm countersunk, for 18mm panels, already owned         | €0        |
 | Washers ~128          | M4 flat, one under each screw head, already owned            | €0        |
 | Pocket plugs ~64      | [Shiwaki pine 9.5mm, 50 pack](https://www.amazon.ie/dp/B09P53GBG9), for open shelves, 2 packs | €15.98 |
-| Pocket hole jig       | [Gunpla twin kit](https://www.amazon.ie/dp/B0BGWRQYNC), set for 24mm, already bought | €0 |
+| Pocket hole jig       | [Gunpla twin kit](https://www.amazon.ie/dp/B0BGWRQYNC), set for 24mm and 18mm, already bought | €0 |
 | Staples               | narrow crown, 16–19mm legs                                   | €8        |
 | Wood glue             | 1L                                                           | €12       |
 | Connector bolts ×8    | for the joint in each set                                    | €8        |
@@ -204,24 +215,22 @@ Rough placeholder prices, each a setting; replace with real ones.
 | Roller sleeves ×3     | [Axus Blonde 101mm, pack of 10](https://tjomahony.ie/axus-blonde-100-natural-wool-mini-sleeve-pack-of-10-4-101mm-78axu-rbln410.html), 1 pack | €9.72 |
 | Brush                 | [Screwfix 173FM synthetic 3"](https://www.screwfix.ie/p/synthetic-paint-brush-3-/173fm) | €4.95     |
 | Sanding sponges ×5    | [Bosch Expert 421VV](https://www.screwfix.ie/p/bosch-expert-superfine-fine-medium-grit-multi-material-hand-sanding-sponges-97mm-x-67mm-3-pack/421vv), superfine/fine/medium, 2 packs | €13.70    |
-| **Subtotal**          |                                                              | **~€256** |
+| **Subtotal**          |                                                              | **~€225** |
 
 
-Most concealed hinges cover 16–26mm doors; check before buying. Candidates:
-[LOOTICH pack of 8](https://www.amazon.ie/dp/B07RQNGGCY) (€17.22, rated 16–19mm; test on a
-24mm offcut first) or [Hettich pair](https://www.amazon.ie/dp/B078MBDM72) (€13.78 per 2,
-rated 15–24mm).
+Hafele chosen: 4.7★ from 412 reviews, in stock at Screwfix Finglas. Stock concealed
+hinges are rated about 14–22mm, so 18mm doors fit any of them.
 
 ### 4.4 Total
 
 
 |                     | Estimate                          |
 | ------------------- | --------------------------------- |
-| Sheets              | €525.58                           |
+| Sheets              | €566.54                           |
 | Cutting             | €0, own plunge saw                |
-| Hardware and finish | ~€256                             |
+| Hardware and finish | ~€225                             |
 | Delivery            | unknown (0 for click and collect) |
-| **Total**           | **~€769 before delivery**         |
+| **Total**           | **~€792 before delivery**         |
 
 
 
@@ -244,12 +253,14 @@ roller, then tip off at once with a near-dry wide synthetic brush, light strokes
 along the grain, end to end in one pass; never rework areas that have started to set.
 Brush the edges, stir rather than shake. One coat. Coat both faces
 equally so panels don't cup. Hardwax oil is wiped on thin and buffed, not rolled.
-- **Joinery:** butt joints with glue and 4 × 40mm countersunk wood screws on M4 washers in pocket holes
-(pocket screws were out of stock; the washer gives the tapered head a flat seat), pockets on each panel's hidden
+- **Joinery:** butt joints with glue and countersunk wood screws on M4 washers in pocket
+holes: 4 × 40mm in 24mm panels, 4 × 30mm in 18mm panels so the tip can't break out
+through the side's outer face. Set the jig and bit collar to each panel's thickness.
+Pocket screws were out of stock; the washer gives the tapered head a flat seat. Pockets on each panel's hidden
 face, so no screw heads show on the outer sides; open-shelf pockets are plugged. Clamp
 each panel on its line while driving; the screw nudges it away from the pocket face. No dados.
 - **Backs:** square each frame, then glue and staple every 10–15cm. Keep each staple's
-crown along the 24mm edge, not across it, so a leg can't split out through a face.
+crown along the pine edge, not across it, so a leg can't split out through a face.
 Pencil the shelf lines on the back first. Glue is safe because every glued edge runs
 along the pine's grain.
 - **Install:** remove the skirting boards. Bolt each set's two units together, then fix
@@ -363,7 +374,7 @@ instance. Values are in cm, one per line with a short comment. When a value was 
 for sheet yield or another constraint, the comment says so, e.g.
 `wide_width = 83.6  # 3 shelves per 243cm strip`. Banner comments group them:
 
-- **Dimensions:** unit widths, height, shelf depth, pine and back thickness, kickboard,
+- **Dimensions:** unit widths, height, shelf depth, 24mm and 18mm pine and back thickness, kickboard,
 cabinet height, door gaps, cabinet shelf depth.
 - **Layout:** `layout = ["narrow", "wide", "fireplace", "wide", "narrow"]` and
 `fireplace_width = 160`. Unit counts and the bolted joints (neighbors not split by the
@@ -485,13 +496,11 @@ than the strip; that's how narrow shelves land in side and door offcuts.
 - **Shared sheets:** parts from all units share sheets, grouped by material.
 - **Quality:** a single greedy pass can miss the best layout at this fill level, so the
 packer tries several part orderings and keeps the one with the fewest sheets.
-- **Expected:** 4 pine and 2 birch sheets. A hand layout that achieves it:
-  - Pine 1–2: four side strips each; each side's offcut is a narrow shelf.
-  - Pine 3: four strips of three wide shelf-sized panels (12).
-  - Pine 4: two 41.6cm door strips (3 doors; 1 door and 6 narrow shelves), a 10cm strip
-  with the kickboards, and a 25cm strip with both cabinet shelves.
-  - The 1-door strip is the tightest: a door longer than 77.6cm (3mm saw) or 76.6cm (4mm)
-  costs a 5th pine sheet.
+- **Expected:** 3 × 24mm pine, 2 × 18mm pine and 2 birch sheets:
+  - 24mm 1–2: four side strips each; side offcuts hold the 8 narrow tops and bottoms.
+  - 24mm 3: two strips of three wide tops, bottoms and cabinet tops; half the sheet spare.
+  - 18mm 1–2: the 16 shelves, 2 cabinet shelves and 4 kickboards in 29.5cm strips and
+  door offcuts, and the 4 doors in three 41.6cm strips.
   - Birch 1–2: one wide and one narrow back side by side.
 
 
@@ -499,7 +508,7 @@ packer tries several part orderings and keeps the one with the fewest sheets.
 ## 7. Quality
 
 - **Model checks** in `model.py`, before any export:
-  - layout bounding box is 391.2 × 32.3 × 213 (unit widths plus `config.fireplace_width`, by
+  - layout bounding box is 391.2 × 31.7 × 213 (unit widths plus `config.fireplace_width`, by
   depth + back + door, by height);
   - no two panels overlap, within a unit or between neighbors;
   - every panel fits the usable sheet with its length along the grain (sides and backs
@@ -519,8 +528,8 @@ must pass.
 - **Review:** one status item per commit, with the spec updated and the regenerated
 `materials.md` and `instructions.md` included, plus a 2–3 line summary of which numbers
 moved. Geometry changes also get a look at `front.svg` and the sheet diagrams.
-- **Halt:** if the packer reports more than 4 pine sheets with the defaults, improve the
-packer rather than accept it; the hand layout proves 4 fit.
+- **Halt:** if the packer reports more than 3 × 24mm or 2 × 18mm pine sheets with the
+defaults, improve the packer rather than accept it.
 
 
 
@@ -530,7 +539,15 @@ Options considered and why they lost. Newest first within each group.
 
 **Material:**
 
-- 18mm pine (€69.68/sheet): €115 cheaper and lighter, but a slimmer look; 24mm chosen.
+- All 24mm pine (4 sheets, ~€769): 24mm doors are past every affordable concealed
+hinge's rating (Hafele, Eclipse 14–22mm; LOOTICH 16–19mm); only Hettich lists 24mm, at
+~€75 for 8 from the UK. 18mm shelves, doors, cabinet shelves and kickboards keep stock
+hinges and a lighter shelf look for +€41 (a 5th sheet, the third 24mm half spare).
+- 18mm doors and hidden parts only: fixes the hinges too, but mixes thicknesses where
+open shelves show; all shelves 18mm reads as a deliberate frame.
+- Full overlay still shows ~6mm of each 24mm side beside the closed doors; 18mm sides
+would hide it but lose the chunky frame.
+- 18mm pine (€69.68/sheet) for everything: €115 cheaper and lighter, but a slimmer look.
 - 24mm for only the sides and tops: costs more than all 24mm, because it breaks the sheet
 layout and needs a third 24mm sheet.
 - Inset 18mm back: needed a third 18mm sheet and fitting; a thin nailed-on back is simpler.
@@ -558,6 +575,9 @@ each unit by 1.2cm (118cm sets) would restore 80cm and 28.4cm shelves at the sam
 count, if the wall allows.
 
 **Layout and features:**
+
+- LOOTICH hinges (€17.22 for 8, rated 16–19mm) and Hettich Sensys (rated to 24mm, ~€75
+for 8 from the UK): Hafele from Screwfix is in stock locally with far more reviews.
 
 - One row of four bolted units: replaced by two sets either side of the fireplace.
 - Shared sides between units: saves no sheet, loses movability.

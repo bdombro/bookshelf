@@ -30,6 +30,7 @@ knob_from_door_top = 6
 sanding_coverage = 5  # m² per sponge, light sand of factory-smooth pine
 roller_coverage = 6  # m² per sleeve per coat before it sheds or drags
 kit_sleeves = 1  # assumed; the listing doesn't say
+thin_pine_thickness = 1.8  # shelves, cabinet shelves, doors, kickboards; stock hinges
 
 # --- Layout ---
 layout = ["narrow", "wide", "fireplace", "wide", "narrow"]
@@ -46,7 +47,7 @@ pine_sheet_price = 98.40
 birch_sheet_price = 65.99
 cut_price = 0  # own plunge saw; 0 shows as €0
 delivery_price = 0  # 0 shows as unknown
-hinge_pack = (2, 10.0)  # (pieces, price)
+hinge_pack = (2, 5.45)  # (pieces, price); Hafele, Screwfix 9205J
 knob_pack = (1, 3.0)
 pocket_jig_pack = (1, 0.0)  # Gunpla twin jig kit, €18.55, already bought
 screw_pack = (100, 0.0)  # 4 × 40mm countersunk wood screws, already owned
@@ -65,6 +66,8 @@ brush_pack = (1, 4.95)  # Screwfix 173FM
 sanding_pack = (3, 6.85)  # Screwfix 421VV
 roller_pack = (1, 5.65)  # Axus Blonde mini roller kit, sale price
 sleeve_pack = (10, 9.72)  # Axus Blonde 101mm sleeves, sale price
+thin_pine_sheet_price = 69.68
+short_screw_pack = (100, 0.0)  # 4 × 30mm countersunk, for 18mm panels, already owned
 
 # --- Links ---
 brush_url = "https://www.screwfix.ie/p/synthetic-paint-brush-3-/173fm"
@@ -74,6 +77,7 @@ finish_url = "https://tjomahony.ie/rn-int-varnish-antique-pine-satin-750ml-75368
 roller_url = "https://tjomahony.ie/axus-blonde-100-natural-wool-mini-roller-kit-78axu-rkbln4.html"
 sanding_url = "https://www.screwfix.ie/p/bosch-expert-superfine-fine-medium-grit-multi-material-hand-sanding-sponges-97mm-x-67mm-3-pack/421vv"
 sleeve_url = "https://tjomahony.ie/axus-blonde-100-natural-wool-mini-sleeve-pack-of-10-4-101mm-78axu-rbln410.html"
+hinge_url = "https://www.screwfix.ie/p/hafele-steel-110-soft-close-clip-on-concealed-hinges-64mm-2-pack/9205j"
 
 # --- Viewer ---
 hide_doors = False
