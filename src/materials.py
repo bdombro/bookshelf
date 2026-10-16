@@ -15,10 +15,10 @@ eps = 1e-6
 
 
 class Part(NamedTuple):
-    label: str  # e.g. "wide_1 / shelf_2"
-    unit: str  # e.g. "wide_1"
+    label: str  # e.g. "unit_1 / wide shelf_2"
+    unit: str  # e.g. "unit_1"
     name: str  # e.g. "shelf"
-    unit_type: str  # "wide" or "narrow"
+    unit_type: str  # bay type, "wide" or "narrow", or "frame"
     length: float  # along the grain
     width: float
     thickness: float
@@ -240,23 +240,21 @@ def write_materials(
     hardware: list[Hardware],
     path: Path,
     sheets_dir: Path,
-    sheet_length: float,
-    sheet_width: float,
+    sheets: dict[str, tuple[float, float, float]],  # length, width, price
     edge_trim: float,
     kerf: float,
-    sheet_prices: dict[str, float],
     cut_price: float,
     delivery_price: float,
 ) -> tuple[dict[str, int], list[str]]:
     """Pack each material, write materials.md and sheet diagrams; return counts and
     the cutting list lines."""
-    usable_length = sheet_length - 2 * edge_trim
-    usable_width = sheet_width - 2 * edge_trim
     materials = list(dict.fromkeys(p.material for p in parts))
+    usable = {
+        m: (sheets[m][0] - 2 * edge_trim, sheets[m][1] - 2 * edge_trim)
+        for m in materials
+    }
     packings = {
-        m: best_packing(
-            [p for p in parts if p.material == m], usable_length, usable_width, kerf
-        )
+        m: best_packing([p for p in parts if p.material == m], *usable[m], kerf)
         for m in materials
     }
     counts = {m: 1 + max(p.sheet for p in packings[m]) for m in materials}
@@ -295,20 +293,23 @@ def write_materials(
     ]
     sheet_total = 0.0
     for m in materials:
+        sheet_length, sheet_width, price = sheets[m]
         area = sum(p.length * p.width for p in parts if p.material == m)
         used = area / (counts[m] * sheet_length * sheet_width)
-        total = counts[m] * sheet_prices[m]
+        total = counts[m] * price
         sheet_total += total
         lines.append(
             f"| {m} | {size(sheet_length)} × {size(sheet_width)} | {counts[m]} | "
-            f"{used:.0%} | {money(sheet_prices[m])} | {money(total)} |"
+            f"{used:.0%} | {money(price)} | {money(total)} |"
         )
     lines += ["", warning]
     cutting = [
         f"Each sheet is trimmed {size(edge_trim)}cm on every edge, leaving "
-        f"{size(usable_length)} × {size(usable_width)}cm. Rip the strips across the "
-        f"sheet in order, then crosscut each strip. Every part's length runs along "
-        f"the grain. Saw cut {size(kerf)}cm."
+        + ", ".join(
+            f"{size(usable[m][0])} × {size(usable[m][1])}cm of {m}" for m in materials
+        )
+        + ". Rip the strips across the sheet in order, then crosscut each strip. "
+        f"Every part's length runs along the grain. Saw cut {size(kerf)}cm."
     ]
     sheets_dir.mkdir(parents=True, exist_ok=True)
     for old in sheets_dir.glob("*.svg"):
@@ -335,9 +336,7 @@ def write_materials(
                         f"   - crosscut {size(p.part.length)}cm: {p.part.label}{extra}"
                     )
             diagram = sheets_dir / f"{slug}_{sheet + 1}.svg"
-            body, w, h = sheet_svg(
-                on_sheet, title, sheet_length, sheet_width, edge_trim
-            )
+            body, w, h = sheet_svg(on_sheet, title, *sheets[m][:2], edge_trim)
             diagram.write_text(svg_file(body, w, h))
             stacked.append(f'<g transform="translate(0 {stacked_h})">\n{body}\n</g>')
             stacked_w, stacked_h = max(stacked_w, w), stacked_h + h
@@ -362,7 +361,7 @@ def write_materials(
         item = f"[{row.item}]({row.url})" if row.url else row.item
         lines.append(
             f"| {item} | {row.spec} | {row.quantity} | {packs} × {row.pack_size} | "
-            f"{money(cost)} |"
+            f"€{cost:,.2f} |"
         )
     cut_total = cuts * cut_price
     total = sheet_total + cut_total + hardware_total + delivery_price
@@ -379,9 +378,10 @@ def write_materials(
         if cut_price
         else f"| Cutting ({cuts} cuts, own plunge saw) | €0.00 |",
         f"| Hardware and finish | {money(hardware_total)} |",
-        f"| Delivery | {money(delivery_price)} |",
-        f"| **Total** | **{money(total)}**"
-        f"{' before delivery' if not delivery_price else ''} |",
+        f"| Delivery | {money(delivery_price)} |"
+        if delivery_price
+        else "| Delivery (own pickup) | €0.00 |",
+        f"| **Total** | **{money(total)}** |",
         "",
         warning,
         "",
