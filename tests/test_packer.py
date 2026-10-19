@@ -2,7 +2,8 @@
 
 import pytest
 
-from materials import Part, Placement, best_packing, check_layout
+from bookshelf.packing.packer import best_packing, check_layout
+from bookshelf.rows import Part, Placement
 
 length, width, kerf = 243, 121, 0.3
 

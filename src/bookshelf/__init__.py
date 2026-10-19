@@ -1,2 +1,1 @@
-def main() -> None:
-    print("Hello from bookshelf!")
+"""Parametric model, cut list and instructions for laminated pine bookshelves."""

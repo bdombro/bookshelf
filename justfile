@@ -1,5 +1,5 @@
 build:
-    uv run src/model.py
+    PYTHONPATH=src uv run -m bookshelf.build
     rsvg-convert -b white -z 2 build/sheets/all.svg -o build/sheets/all.png
 
 check:
@@ -12,4 +12,4 @@ check:
 
 view:
     @#code --install-extension bernhard-42.ocp-cad-viewer
-    uv run src/model.py --view
+    PYTHONPATH=src uv run -m bookshelf.build --view
